@@ -1,3 +1,4 @@
+import 'package:e_commerce/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -5,6 +6,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
   }
 }
