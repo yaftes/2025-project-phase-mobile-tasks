@@ -1,4 +1,5 @@
 import 'package:e_commerce/data.dart';
+import 'package:e_commerce/screens/detail_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -84,12 +85,12 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: CircleAvatar(
           backgroundColor: Colors.blue,
           maxRadius: 200,
-
           child: Icon(Icons.add, color: Colors.white, size: 28),
         ),
       ),
