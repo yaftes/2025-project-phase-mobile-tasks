@@ -25,7 +25,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 252, 251, 251),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -48,18 +48,41 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text(widget.category), Text('(4.0)')],
+                    children: [
+                      Text(
+                        widget.category,
+                        style: TextStyle(
+                          color: Colors.grey.withAlpha(90),
+                          fontSize: 14,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.star, size: 20, color: Colors.amberAccent),
+                          Text(
+                            '(4.0)',
+                            style: TextStyle(color: Colors.grey.withAlpha(90)),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(widget.name),
-                      Text(widget.price.toString()),
+                      Text(
+                        widget.name,
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text('\$${widget.price.toString()}'),
                     ],
                   ),
                   SizedBox(height: 15),
-                  Text('Size'),
+                  Text('Size:', style: TextStyle(fontSize: 16)),
                   SizedBox(height: 20),
                   SizedBox(
                     height: 50,
@@ -70,7 +93,10 @@ class _DetailPageState extends State<DetailPage> {
                         _buildTextContainer(32),
                         _buildTextContainer(33),
                         _buildTextContainer(34),
-                        _buildTextContainer(35),
+                        _buildTextContainer(
+                          35,
+                          color: Color.fromARGB(255, 38, 38, 231),
+                        ),
                         _buildTextContainer(36),
                         _buildTextContainer(37),
                         _buildTextContainer(38),
@@ -80,13 +106,54 @@ class _DetailPageState extends State<DetailPage> {
                   ),
 
                   SizedBox(height: 20),
-                  Text(widget.description),
 
-                  SizedBox(height: 15),
-                  Row(children: [
-              
-                ],
-              ),
+                  Text(widget.description),
+                  SizedBox(height: 45),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 50,
+                            vertical: 10,
+                          ),
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(8),
+                            side: BorderSide(color: Colors.redAccent),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          'DELETE',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 38, 38, 231),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 50,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(8),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          'UPDATE',
+                          style: TextStyle(color: Colors.white, fontSize: 10),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -96,16 +163,22 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  Widget _buildTextContainer(int size) {
+  Widget _buildTextContainer(int size, {Color? color = Colors.white}) {
     return Container(
       margin: EdgeInsets.only(right: 10),
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.black12),
       ),
-      child: Center(child: Text(size.toString())),
+      child: Center(
+        child: Text(
+          size.toString(),
+          style: TextStyle(
+            color: color == Colors.white ? Colors.black : Colors.white,
+          ),
+        ),
+      ),
     );
   }
 }
