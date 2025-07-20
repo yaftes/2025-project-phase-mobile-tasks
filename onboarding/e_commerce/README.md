@@ -2,15 +2,16 @@
 
 A new Flutter project.
 
-## Getting Started
+## 📱 Screenshots
 
-This project is a starting point for a Flutter application.
+### 🖼 Home Screen
+![Home Screen](screenshots/home_page.jpg)
 
-A few resources to get you started if this is your first Flutter project:
+### 🖼 Add Update Screen
+![Product Page](screenshots/add_update_page.jpg)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 🖼 Detail Screen
+![Cart Page](screenshots/detail_page.jpg)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 🖼 Search Product Screen
+![Checkout Page](screenshots/search_product.jpg)
