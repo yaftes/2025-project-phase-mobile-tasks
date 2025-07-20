@@ -11,7 +11,7 @@ final List<CustomCard> data = [
         'Perfect for cool weather or a night out. '
         'The inner lining adds warmth without extra bulk. '
         'A must-have statement piece in any wardrobe.',
-    price: 129.99,
+    price: 129,
   ),
   CustomCard(
     imageName: 'shoes.jpg',
@@ -23,7 +23,7 @@ final List<CustomCard> data = [
         'Responsive cushioning absorbs impact with every step. '
         'Ideal for road or treadmill running. '
         'Supportive heel and arch design for a stable stride.',
-    price: 89.50,
+    price: 89,
   ),
   CustomCard(
     imageName: 'sneakers.jpeg',
@@ -35,7 +35,7 @@ final List<CustomCard> data = [
         'Soft canvas material ensures all-day breathability. '
         'Durable rubber sole adds excellent traction and flexibility. '
         'Great for walking, errands, or weekend outings.',
-    price: 74.25,
+    price: 74,
   ),
   CustomCard(
     imageName: 'skirt.jpg',
@@ -47,7 +47,7 @@ final List<CustomCard> data = [
         'Features a frayed hem and subtle fading for a worn-in look. '
         'Two side pockets and a zip closure at the back. '
         'Made from high-quality cotton-blend denim.',
-    price: 59.99,
+    price: 59,
   ),
   CustomCard(
     imageName: 't-shirt.jpeg',
@@ -59,6 +59,6 @@ final List<CustomCard> data = [
         'Features a crew neck, short sleeves, and a relaxed fit. '
         'The printed design is high-quality and fade-resistant. '
         'Ideal for layering or wearing on its own.',
-    price: 29.95,
+    price: 29,
   ),
 ];

@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 244, 243, 243),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
         child: Column(
@@ -76,23 +76,40 @@ class HomePage extends StatelessWidget {
 
             SizedBox(height: 35),
             //
-            Text(
-              'Available Products',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Available Products',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                ),
+                Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: BoxBorder.all(color: Colors.grey.withAlpha(90)),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(
+                    Icons.search_outlined,
+                    color: Colors.grey.withAlpha(90),
+                  ),
+                ),
+              ],
             ),
+
             //
             Expanded(child: ListView(children: data)),
           ],
         ),
       ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: CircleAvatar(
-          backgroundColor: Colors.blue,
-          maxRadius: 200,
-          child: Icon(Icons.add, color: Colors.white, size: 28),
+      floatingActionButton: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 38, 38, 231),
+          borderRadius: BorderRadius.circular(50),
         ),
+        child: Icon(Icons.add, size: 30, color: Colors.white),
       ),
     );
   }

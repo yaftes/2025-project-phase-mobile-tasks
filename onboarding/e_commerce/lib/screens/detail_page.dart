@@ -81,6 +81,7 @@ class _DetailPageState extends State<DetailPage> {
 
                   SizedBox(height: 20),
                   Text(widget.description),
+
                   SizedBox(height: 15),
                   Row(children: [
               

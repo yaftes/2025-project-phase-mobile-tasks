@@ -39,25 +39,58 @@ class _CustomCardState extends State<CustomCard> {
           ),
         );
       },
-      child: Card(
+      child: Container(
         margin: EdgeInsets.symmetric(vertical: 10),
-        color: Colors.white,
-        elevation: 4,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(22),
+        ),
+
         child: Column(
           children: [
-            Image.asset(
-              "assets/images/${widget.imageName}",
+            Container(
               height: 150,
-              width: double.infinity,
-              fit: BoxFit.cover,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(22),
+                  topRight: Radius.circular(22),
+                ),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/${widget.imageName}'),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(10),
               child: ListTile(
                 title: Text(widget.name),
-                subtitle: Text(widget.category),
+                subtitle: Text(
+                  widget.category,
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey.withAlpha(90),
+                  ),
+                ),
                 trailing: Column(
-                  children: [Text(widget.price.toString()), Text('(4.0)')],
+                  children: [
+                    Text(
+                      '\$${widget.price.toString()}',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.star, color: Colors.amberAccent, size: 18),
+                        SizedBox(width: 5),
+                        Text(
+                          '(4.0)',
+                          style: TextStyle(color: Colors.grey.withAlpha(90)),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
