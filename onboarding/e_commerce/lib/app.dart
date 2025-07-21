@@ -1,6 +1,4 @@
-import 'package:e_commerce/screens/add_update_page.dart';
 import 'package:e_commerce/screens/home_page.dart';
-import 'package:e_commerce/screens/search_product_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {

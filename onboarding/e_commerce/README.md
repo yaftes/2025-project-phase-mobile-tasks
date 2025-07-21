@@ -12,6 +12,6 @@ A new Flutter project.
 
 ### 🖼 Detail Screen
 ![Cart Page](screenshots/detail_page.jpg)
-
+r
 ### 🖼 Search Product Screen
 ![Checkout Page](screenshots/search_product.jpg)
