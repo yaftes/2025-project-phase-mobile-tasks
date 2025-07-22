@@ -1,9 +1,15 @@
-import 'package:e_commerce/data.dart';
+import 'package:e_commerce/services/data.dart';
+import 'package:e_commerce/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,19 +102,33 @@ class HomePage extends StatelessWidget {
               ],
             ),
 
-            //
-            Expanded(child: ListView(children: data)),
+            Expanded(
+              child: ListView.builder(
+                itemCount: listOfProducts.length,
+                itemBuilder: (context, index) {
+                  return CustomCard(product: listOfProducts[index]);
+                },
+              ),
+            ),
           ],
         ),
       ),
 
-      floatingActionButton: Container(
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 38, 38, 231),
-          borderRadius: BorderRadius.circular(50),
+      floatingActionButton: GestureDetector(
+        onTap: () async {
+          final result = await Navigator.pushNamed(context, '/add');
+          if (result == true) {
+            setState(() {});
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 38, 38, 231),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Icon(Icons.add, size: 30, color: Colors.white),
         ),
-        child: Icon(Icons.add, size: 30, color: Colors.white),
       ),
     );
   }

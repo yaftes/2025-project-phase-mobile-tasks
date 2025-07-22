@@ -1,8 +1,8 @@
-import 'package:e_commerce/widgets/custom_card.dart';
+import 'package:e_commerce/model/product.dart';
 
-final List<CustomCard> data = [
-  CustomCard(
-    imageName: 'jacket.jpg',
+final List<Product> listOfProducts = [
+  Product(
+    imagePath: 'jacket.jpg',
     name: 'Leather Jacket',
     category: 'Men\'s Fashion',
     description:
@@ -13,8 +13,8 @@ final List<CustomCard> data = [
         'A must-have statement piece in any wardrobe.',
     price: 129,
   ),
-  CustomCard(
-    imageName: 'shoes.jpg',
+  Product(
+    imagePath: 'shoes.jpg',
     name: 'Running Shoes',
     category: 'Footwear',
     description:
@@ -25,8 +25,8 @@ final List<CustomCard> data = [
         'Supportive heel and arch design for a stable stride.',
     price: 89,
   ),
-  CustomCard(
-    imageName: 'sneakers.jpeg',
+  Product(
+    imagePath: 'sneakers.jpeg',
     name: 'Casual Sneakers',
     category: 'Unisex Footwear',
     description:
@@ -37,8 +37,8 @@ final List<CustomCard> data = [
         'Great for walking, errands, or weekend outings.',
     price: 74,
   ),
-  CustomCard(
-    imageName: 'skirt.jpg',
+  Product(
+    imagePath: 'skirt.jpg',
     name: 'Denim Skirt',
     category: 'Women\'s Apparel',
     description:
@@ -49,8 +49,8 @@ final List<CustomCard> data = [
         'Made from high-quality cotton-blend denim.',
     price: 59,
   ),
-  CustomCard(
-    imageName: 't-shirt.jpeg',
+  Product(
+    imagePath: 't-shirt.jpeg',
     name: 'Graphic T-Shirt',
     category: 'Casual Wear',
     description:

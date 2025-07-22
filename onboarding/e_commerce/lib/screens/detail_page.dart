@@ -1,20 +1,10 @@
+import 'package:e_commerce/model/product.dart';
+import 'package:e_commerce/services/product_service.dart';
+import 'package:e_commerce/utils/helpers.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
-  final String imageName;
-  final String name;
-  final String category;
-  final double price;
-  final String description;
-
-  const DetailPage({
-    super.key,
-    required this.imageName,
-    required this.name,
-    required this.category,
-    required this.description,
-    required this.price,
-  });
+  const DetailPage({super.key});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -24,6 +14,8 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final _prodcut = ModalRoute.of(context)!.settings.arguments as Product;
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 252, 251, 251),
       body: SingleChildScrollView(
@@ -34,7 +26,9 @@ class _DetailPageState extends State<DetailPage> {
               height: screenHeight / 3,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/${widget.imageName}"),
+                  image: AssetImage(
+                    "assets/images/${_prodcut.imagePath ?? 'jacket.jpg'}",
+                  ),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -50,7 +44,7 @@ class _DetailPageState extends State<DetailPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.category,
+                        _prodcut.category,
                         style: TextStyle(
                           color: Colors.grey.withAlpha(90),
                           fontSize: 14,
@@ -72,13 +66,13 @@ class _DetailPageState extends State<DetailPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.name,
+                        _prodcut.name,
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text('\$${widget.price.toString()}'),
+                      Text('\$${_prodcut.price.toString()}'),
                     ],
                   ),
                   SizedBox(height: 15),
@@ -107,7 +101,7 @@ class _DetailPageState extends State<DetailPage> {
 
                   SizedBox(height: 20),
 
-                  Text(widget.description),
+                  Text(_prodcut.description),
                   SizedBox(height: 45),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -125,7 +119,11 @@ class _DetailPageState extends State<DetailPage> {
                             side: BorderSide(color: Colors.redAccent),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          ProductService.delete(_prodcut.name);
+                          showSnackBar(context, 'Product Deleted');
+                          Navigator.pop(context, true);
+                        },
                         child: Text(
                           'DELETE',
                           style: TextStyle(
@@ -146,7 +144,13 @@ class _DetailPageState extends State<DetailPage> {
                             borderRadius: BorderRadiusGeometry.circular(8),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/update',
+                            arguments: _prodcut,
+                          );
+                        },
                         child: Text(
                           'UPDATE',
                           style: TextStyle(color: Colors.white, fontSize: 10),
