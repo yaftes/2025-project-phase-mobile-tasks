@@ -1,20 +1,27 @@
 import 'package:e_commerce/model/product.dart';
 import 'package:flutter/material.dart';
 
-class CustomCard extends StatefulWidget {
+class CustomCard extends StatelessWidget {
   final Product product;
-  const CustomCard({required this.product, super.key});
-  @override
-  State<CustomCard> createState() => _CustomCardState();
-}
+  final void Function() onDelete;
 
-class _CustomCardState extends State<CustomCard> {
+  const CustomCard({required this.product, required this.onDelete, super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/detail', arguments: widget.product);
+      onTap: () async {
+        final result = await Navigator.pushNamed(
+          context,
+          '/detail',
+          arguments: product,
+        );
+
+        if (result == true) {
+          onDelete();
+        }
       },
+
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
@@ -32,7 +39,7 @@ class _CustomCardState extends State<CustomCard> {
                 ),
                 image: DecorationImage(
                   image: AssetImage(
-                    'assets/images/${widget.product.imagePath ?? 'jacket.jpg'}',
+                    'assets/images/${product.imagePath ?? 'jacket.jpg'}',
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -42,9 +49,9 @@ class _CustomCardState extends State<CustomCard> {
             Padding(
               padding: EdgeInsets.all(10),
               child: ListTile(
-                title: Text(widget.product.name),
+                title: Text(product.name),
                 subtitle: Text(
-                  widget.product.category,
+                  product.category,
                   style: TextStyle(
                     fontSize: 10,
                     color: Colors.grey.withAlpha(90),
@@ -53,7 +60,7 @@ class _CustomCardState extends State<CustomCard> {
                 trailing: Column(
                   children: [
                     Text(
-                      '\$${widget.product.price.toString()}',
+                      '\$${product.price.toString()}',
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
                     SizedBox(height: 10),

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
-
   @override
   State<DetailPage> createState() => _DetailPageState();
 }
@@ -14,7 +13,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final _prodcut = ModalRoute.of(context)!.settings.arguments as Product;
+    final _product = ModalRoute.of(context)!.settings.arguments as Product;
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 252, 251, 251),
@@ -27,7 +26,7 @@ class _DetailPageState extends State<DetailPage> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    "assets/images/${_prodcut.imagePath ?? 'jacket.jpg'}",
+                    "assets/images/${_product.imagePath ?? 'jacket.jpg'}",
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -44,7 +43,7 @@ class _DetailPageState extends State<DetailPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        _prodcut.category,
+                        _product.category,
                         style: TextStyle(
                           color: Colors.grey.withAlpha(90),
                           fontSize: 14,
@@ -66,13 +65,13 @@ class _DetailPageState extends State<DetailPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        _prodcut.name,
+                        _product.name,
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text('\$${_prodcut.price.toString()}'),
+                      Text('\$${_product.price.toString()}'),
                     ],
                   ),
                   SizedBox(height: 15),
@@ -101,7 +100,7 @@ class _DetailPageState extends State<DetailPage> {
 
                   SizedBox(height: 20),
 
-                  Text(_prodcut.description),
+                  Text(_product.description),
                   SizedBox(height: 45),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -120,7 +119,7 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                         onPressed: () {
-                          ProductService.delete(_prodcut.name);
+                          ProductService.deleteProduct(_product.name);
                           showSnackBar(context, 'Product Deleted');
                           Navigator.pop(context, true);
                         },
@@ -144,12 +143,15 @@ class _DetailPageState extends State<DetailPage> {
                             borderRadius: BorderRadiusGeometry.circular(8),
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(
+                        onPressed: () async {
+                          final result = await Navigator.pushNamed(
                             context,
                             '/update',
-                            arguments: _prodcut,
+                            arguments: _product,
                           );
+                          if (result == true) {
+                            setState(() {});
+                          }
                         },
                         child: Text(
                           'UPDATE',

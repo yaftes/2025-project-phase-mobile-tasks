@@ -106,7 +106,12 @@ class _HomePageState extends State<HomePage> {
               child: ListView.builder(
                 itemCount: listOfProducts.length,
                 itemBuilder: (context, index) {
-                  return CustomCard(product: listOfProducts[index]);
+                  return CustomCard(
+                    product: listOfProducts[index],
+                    onDelete: () {
+                      setState(() {});
+                    },
+                  );
                 },
               ),
             ),

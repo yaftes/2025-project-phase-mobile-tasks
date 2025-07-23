@@ -1,9 +1,9 @@
 class Product {
-  final String? imagePath;
-  final String name;
-  final String category;
-  final double price;
-  final String description;
+  String? imagePath;
+  String name;
+  String category;
+  double price;
+  String description;
 
   Product({
     this.imagePath = 'jacket.jpg',

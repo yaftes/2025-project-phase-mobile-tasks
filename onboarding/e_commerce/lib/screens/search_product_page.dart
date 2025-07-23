@@ -3,11 +3,9 @@ import 'package:e_commerce/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 
 class SearchProductPage extends StatefulWidget {
-
   const SearchProductPage({super.key});
   @override
   State<SearchProductPage> createState() => _SearchProductPageState();
-  
 }
 
 class _SearchProductPageState extends State<SearchProductPage> {
@@ -78,7 +76,10 @@ class _SearchProductPageState extends State<SearchProductPage> {
               padding: const EdgeInsets.all(16),
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  return CustomCard(product: listOfProducts[index]);
+                  return CustomCard(
+                    product: listOfProducts[index],
+                    onDelete: () {},
+                  );
                 },
               ),
             ),

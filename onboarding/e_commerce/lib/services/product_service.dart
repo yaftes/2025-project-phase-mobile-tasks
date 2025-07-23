@@ -2,7 +2,6 @@ import 'package:e_commerce/model/product.dart';
 import 'package:e_commerce/services/data.dart';
 
 class ProductService {
-
   static void addProduct({
     String? imagePath,
     required String name,
@@ -21,16 +20,31 @@ class ProductService {
     );
   }
 
-  static void delete(String name) {
+  static void deleteProduct(String name) {
+    try {
+      listOfProducts.removeWhere((element) => element.name == name);
+    } catch (e) {
+      print('Item not Found');
+    }
+  }
+
+  static void updateProduct({
+    required String name,
+    required String newName,
+    required String category,
+    required double price,
+    required String description,
+  }) {
     try {
       final product = listOfProducts.firstWhere(
         (element) => element.name == name,
       );
-      listOfProducts.remove(product);
+      product.name = newName;
+      product.category = category;
+      product.description = description;
+      product.price = price;
     } catch (e) {
-      print('Not item found to be deleted');
+      print(e);
     }
   }
-
-  
 }

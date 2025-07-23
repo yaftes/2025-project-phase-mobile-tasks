@@ -228,6 +228,15 @@ class _AddUpdatePageState extends State<AddUpdatePage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         if (isUpdate) {
+                          ProductService.updateProduct(
+                            name: product!.name,
+                            newName: _nameController.text,
+                            category: _categoryController.text,
+                            price: double.parse(_priceController.text),
+                            description: _descriptionController.text,
+                          );
+                          showSnackBar(context, 'product Updated');
+                          Navigator.pop(context, true);
                         } else {
                           addProduct(context);
                         }
