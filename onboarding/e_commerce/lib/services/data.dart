@@ -1,6 +1,7 @@
 import 'package:e_commerce/model/product.dart';
 
 final List<Product> listOfProducts = [
+
   Product(
     imagePath: 'jacket.jpg',
     name: 'Leather Jacket',
@@ -61,4 +62,5 @@ final List<Product> listOfProducts = [
         'Ideal for layering or wearing on its own.',
     price: 29,
   ),
+  
 ];

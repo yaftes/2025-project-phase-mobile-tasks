@@ -112,7 +112,7 @@ class _SearchProductPageState extends State<SearchProductPage> {
                       activeTrackColor: Color.fromARGB(255, 38, 38, 231),
                       inactiveTrackColor: Colors.indigo[100],
                       thumbColor: Colors.white,
-                      overlayColor: Colors.indigo.withOpacity(0.2),
+                      overlayColor: Colors.indigo,
                       thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10),
                       trackHeight: 6,
                     ),

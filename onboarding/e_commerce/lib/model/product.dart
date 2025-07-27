@@ -1,4 +1,5 @@
 class Product {
+  
   String? imagePath;
   String name;
   String category;
