@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'features/product/presentation/pages/add_update_page.dart';
 import 'features/product/presentation/pages/detail_page.dart';
 import 'features/product/presentation/pages/home_page.dart';

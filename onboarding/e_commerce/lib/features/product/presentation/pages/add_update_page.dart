@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:e_commerce/model/product.dart';
 import 'package:e_commerce/services/product_service.dart';
-import 'package:e_commerce/utils/helpers.dart';
+import 'package:e_commerce/core/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';

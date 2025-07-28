@@ -21,7 +21,7 @@ class ProductModel extends Product {
       json['name'] as String,
       json['description'] as String,
       json['imageUrl'] as String,
-      json['price'] as double,
+      (json['price'] as int).toDouble(),
     );
   }
 

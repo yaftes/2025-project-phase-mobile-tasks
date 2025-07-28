@@ -1,6 +1,6 @@
 import 'package:e_commerce/model/product.dart';
 import 'package:e_commerce/services/product_service.dart';
-import 'package:e_commerce/utils/helpers.dart';
+import 'package:e_commerce/core/utils/helpers.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
