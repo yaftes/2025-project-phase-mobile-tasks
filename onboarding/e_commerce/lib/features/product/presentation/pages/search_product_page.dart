@@ -1,6 +1,7 @@
-import 'package:e_commerce/services/data.dart';
-import 'package:e_commerce/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../services/data.dart';
+import '../widgets/custom_card.dart';
 
 class SearchProductPage extends StatefulWidget {
   const SearchProductPage({super.key});

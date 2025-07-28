@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'screens/add_update_page.dart';
-import 'screens/detail_page.dart';
-import 'screens/home_page.dart';
-import 'screens/search_product_page.dart';
+import 'features/product/presentation/pages/add_update_page.dart';
+import 'features/product/presentation/pages/detail_page.dart';
+import 'features/product/presentation/pages/home_page.dart';
+import 'features/product/presentation/pages/search_product_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
