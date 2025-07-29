@@ -1,5 +1,5 @@
-import 'package:e_commerce/model/product.dart';
-import 'package:e_commerce/services/data.dart';
+import '../model/product.dart';
+import 'data.dart';
 
 class ProductService {
 

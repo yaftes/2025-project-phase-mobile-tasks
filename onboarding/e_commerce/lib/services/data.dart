@@ -1,4 +1,4 @@
-import 'package:e_commerce/model/product.dart';
+import '../model/product.dart';
 
 final List<Product> listOfProducts = [
 

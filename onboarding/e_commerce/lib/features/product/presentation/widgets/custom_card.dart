@@ -1,4 +1,4 @@
-import 'package:e_commerce/model/product.dart';
+import '../../../../model/product.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {

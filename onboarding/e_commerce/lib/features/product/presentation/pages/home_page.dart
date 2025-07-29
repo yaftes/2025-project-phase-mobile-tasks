@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Text.rich(
                           TextSpan(
-                            children: [
+                            children: const [
                               TextSpan(
                                 text: 'Hello ,',
                                 style: TextStyle(
