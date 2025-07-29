@@ -122,54 +122,10 @@ class MockProductLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<List<_i2.Product>> viewAllProducts() =>
+  _i4.Future<List<_i2.Product>> getRecentProducts() =>
       (super.noSuchMethod(
-            Invocation.method(#viewAllProducts, []),
+            Invocation.method(#getRecentProducts, []),
             returnValue: _i4.Future<List<_i2.Product>>.value(<_i2.Product>[]),
           )
           as _i4.Future<List<_i2.Product>>);
-
-  @override
-  _i4.Future<_i2.Product> viewSpecificProduct(String? productId) =>
-      (super.noSuchMethod(
-            Invocation.method(#viewSpecificProduct, [productId]),
-            returnValue: _i4.Future<_i2.Product>.value(
-              _FakeProduct_0(
-                this,
-                Invocation.method(#viewSpecificProduct, [productId]),
-              ),
-            ),
-          )
-          as _i4.Future<_i2.Product>);
-
-  @override
-  _i4.Future<void> createProduct(_i2.Product? product) =>
-      (super.noSuchMethod(
-            Invocation.method(#createProduct, [product]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
-
-  @override
-  _i4.Future<_i2.Product> updateProduct(_i2.Product? product) =>
-      (super.noSuchMethod(
-            Invocation.method(#updateProduct, [product]),
-            returnValue: _i4.Future<_i2.Product>.value(
-              _FakeProduct_0(
-                this,
-                Invocation.method(#updateProduct, [product]),
-              ),
-            ),
-          )
-          as _i4.Future<_i2.Product>);
-
-  @override
-  _i4.Future<void> deleteProduct(String? productId) =>
-      (super.noSuchMethod(
-            Invocation.method(#deleteProduct, [productId]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
 }

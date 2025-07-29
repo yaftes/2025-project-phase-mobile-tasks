@@ -28,7 +28,6 @@ class ProductRepositoryImpl extends ProductRepository {
         return Left(ServerFailure());
       }
     }
-
     return Left(ServerFailure());
   }
 
