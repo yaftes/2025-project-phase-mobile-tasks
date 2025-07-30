@@ -6,14 +6,16 @@ import 'package:e_commerce/features/product/data/datasources/product_remote_data
 import 'package:e_commerce/features/product/data/repositories/product_repository_impl.dart';
 import 'package:e_commerce/features/product/domain/entities/product.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import 'product_repository_impl_test.mocks.dart';
 
+
+
 @GenerateMocks([NetworkInfo, ProductRemoteDataSource, ProductLocalDataSource])
+
 void main() {
+
   late MockProductLocalDataSource localDataSource;
   late MockProductRemoteDataSource remoteDataSource;
   late MockNetworkInfo networkInfo;
@@ -29,6 +31,10 @@ void main() {
       networkInfo: networkInfo,
     );
   });
+
+
+
+
 
   test(
     'no specific data should be fetched for view specific product method when the network is offline',
