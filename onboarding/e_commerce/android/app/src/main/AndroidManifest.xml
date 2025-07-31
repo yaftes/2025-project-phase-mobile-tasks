@@ -47,4 +47,6 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+
+    
 </manifest>
