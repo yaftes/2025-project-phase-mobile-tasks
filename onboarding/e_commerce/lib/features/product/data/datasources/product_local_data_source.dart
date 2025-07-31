@@ -17,7 +17,6 @@ class ProductLocalDataSourceImpl implements ProductLocalDataSource {
   @override
   Future<List<Product>> getRecentProducts() async {
     final keys = prefs.getKeys();
-
     if (keys.isNotEmpty) {
       List<Product> products = [];
       for (var key in keys) {

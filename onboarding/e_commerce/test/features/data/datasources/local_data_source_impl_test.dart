@@ -50,7 +50,7 @@ void main() {
       when(preferences.getString(any)).thenAnswer((invocation) {
         final key = invocation.positionalArguments.first as String;
         final productMap = values[key] as Map<String, dynamic>;
-        return productMap != null ? jsonEncode(productMap) : null;
+        return jsonEncode(productMap);
       });
 
       final result = await localDataSource.getRecentProducts();
