@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../domain/entities/product.dart';
@@ -13,8 +12,7 @@ abstract class ProductLocalDataSource {
 
 class ProductLocalDataSourceImpl implements ProductLocalDataSource {
   SharedPreferences prefs;
-
-  ProductLocalDataSourceImpl(this.prefs);
+  ProductLocalDataSourceImpl({required this.prefs});
 
   @override
   Future<List<Product>> getRecentProducts() async {
