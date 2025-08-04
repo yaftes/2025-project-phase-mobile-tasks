@@ -8,6 +8,6 @@ class ViewSpecificProduct {
   ViewSpecificProduct(this.repository);
 
   Future<Either<Failure, Product>> call(String productId) async {
-    return repository.viewSpecificProduct(productId);
+    return repository.getProductById(productId);
   }
 }

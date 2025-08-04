@@ -1,8 +1,7 @@
-import '../../../../model/product.dart';
 import 'package:flutter/material.dart';
+import '../../domain/entities/product.dart';
 
 class CustomCard extends StatelessWidget {
-
   final Product product;
   final void Function() onDelete;
 
@@ -40,7 +39,8 @@ class CustomCard extends StatelessWidget {
                 ),
                 image: DecorationImage(
                   image: AssetImage(
-                    'assets/images/${product.imagePath ?? 'jacket.jpg'}',
+                    // : TODO  add the url implementation here
+                    '',
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -52,7 +52,7 @@ class CustomCard extends StatelessWidget {
               child: ListTile(
                 title: Text(product.name),
                 subtitle: Text(
-                  product.category,
+                  '',
                   style: TextStyle(
                     fontSize: 10,
                     color: Colors.grey.withAlpha(90),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../../../services/data.dart';
 import '../widgets/custom_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -103,19 +101,19 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
 
-            Expanded(
-              child: ListView.builder(
-                itemCount: listOfProducts.length,
-                itemBuilder: (context, index) {
-                  return CustomCard(
-                    product: listOfProducts[index],
-                    onDelete: () {
-                      setState(() {});
-                    },
-                  );
-                },
-              ),
-            ),
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: listOfProducts.length,
+            //     itemBuilder: (context, index) {
+            //       return CustomCard(
+            //         product: listOfProducts[index],
+            //         onDelete: () {
+            //           setState(() {});
+            //         },
+            //       );
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

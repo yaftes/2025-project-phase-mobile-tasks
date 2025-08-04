@@ -1,7 +1,6 @@
-import '../../../../model/product.dart';
-import '../../../../services/product_service.dart';
-import '../../../../core/utils/helpers.dart';
 import 'package:flutter/material.dart';
+import '../../../../core/utils/helpers.dart';
+import '../../domain/entities/product.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -25,9 +24,7 @@ class _DetailPageState extends State<DetailPage> {
               height: screenHeight / 3,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(
-                    "assets/images/${product.imagePath ?? 'jacket.jpg'}",
-                  ),
+                  image: AssetImage(''),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -43,7 +40,7 @@ class _DetailPageState extends State<DetailPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        product.category,
+                        '',
                         style: TextStyle(
                           color: Colors.grey.withAlpha(90),
                           fontSize: 14,
@@ -119,9 +116,9 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                         onPressed: () {
-                          ProductService.deleteProduct(product.name);
-                          showSnackBar(context, 'Product Deleted');
-                          Navigator.pop(context, true);
+                          // ProductService.deleteProduct(product.name);
+                          // showSnackBar(context, 'Product Deleted');
+                          // Navigator.pop(context, true);
                         },
                         child: Text(
                           'DELETE',

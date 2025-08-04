@@ -1,10 +1,10 @@
 import 'dart:io';
-import '../../../../model/product.dart';
-import '../../../../services/product_service.dart';
-import '../../../../core/utils/helpers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../../core/utils/helpers.dart';
+import '../../domain/entities/product.dart';
 
 class AddUpdatePage extends StatefulWidget {
   const AddUpdatePage({super.key});
@@ -37,14 +37,14 @@ class _AddUpdatePageState extends State<AddUpdatePage> {
   }
 
   void addProduct(BuildContext context) async {
-    ProductService.addProduct(
-      name: _nameController.text,
-      category: _categoryController.text,
-      price: double.parse(_priceController.text),
-      description: _descriptionController.text,
-    );
-    showSnackBar(context, 'New product added');
-    Navigator.pop(context, true);
+    // ProductService.addProduct(
+    //   name: _nameController.text,
+    //   category: _categoryController.text,
+    //   price: double.parse(_priceController.text),
+    //   description: _descriptionController.text,
+    // );
+    // showSnackBar(context, 'New product added');
+    // Navigator.pop(context, true);
   }
 
   @override
@@ -66,7 +66,7 @@ class _AddUpdatePageState extends State<AddUpdatePage> {
 
     if (isUpdate) {
       _nameController.text = product!.name;
-      _categoryController.text = product.category;
+      _categoryController.text = '';
       _descriptionController.text = product.description;
       _priceController.text = product.price.toString();
     }
@@ -228,13 +228,13 @@ class _AddUpdatePageState extends State<AddUpdatePage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         if (isUpdate) {
-                          ProductService.updateProduct(
-                            name: product!.name,
-                            newName: _nameController.text,
-                            category: _categoryController.text,
-                            price: double.parse(_priceController.text),
-                            description: _descriptionController.text,
-                          );
+                          // ProductService.updateProduct(
+                          //   name: product!.name,
+                          //   newName: _nameController.text,
+                          //   category: _categoryController.text,
+                          //   price: double.parse(_priceController.text),
+                          //   description: _descriptionController.text,
+                          // );
                           showSnackBar(context, 'product Updated');
                           Navigator.pop(context, true);
                         } else {

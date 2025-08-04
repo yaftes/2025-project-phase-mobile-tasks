@@ -58,7 +58,7 @@ class ProductRepositoryImpl extends ProductRepository {
   }
 
   @override
-  Future<Either<Failure, List<Product>>> viewAllProducts() async {
+  Future<Either<Failure, List<Product>>> getAllProducts() async {
     if (await networkInfo.isConnected) {
       try {
         List<Product> products = await remoteDataSource.viewAllProducts();
@@ -77,7 +77,7 @@ class ProductRepositoryImpl extends ProductRepository {
   }
 
   @override
-  Future<Either<Failure, Product>> viewSpecificProduct(String productId) async {
+  Future<Either<Failure, Product>> getProductById(String productId) async {
     if (await networkInfo.isConnected) {
       try {
         Product product = await remoteDataSource.viewSpecificProduct(productId);

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../../../services/data.dart';
 import '../widgets/custom_card.dart';
 
 class SearchProductPage extends StatefulWidget {
@@ -71,21 +69,20 @@ class _SearchProductPageState extends State<SearchProductPage> {
             ),
           ),
 
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 3,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return CustomCard(
-                    product: listOfProducts[index],
-                    onDelete: () {},
-                  );
-                },
-              ),
-            ),
-          ),
-
+          // SizedBox(
+          //   height: MediaQuery.of(context).size.height / 3,
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(16),
+          //     child: ListView.builder(
+          //       itemBuilder: (context, index) {
+          //         return CustomCard(
+          //           product: listOfProducts[index],
+          //           onDelete: () {},
+          //         );
+          //       },
+          //     ),
+          //   ),
+          // ),
           Expanded(
             child: Container(
               decoration: BoxDecoration(color: Colors.white),

@@ -8,6 +8,6 @@ class ViewAllProducts {
   ViewAllProducts(this.repository);
 
   Future<Either<Failure, List<Product>>> call() async {
-    return await repository.viewAllProducts();
+    return await repository.getAllProducts();
   }
 }
