@@ -24,7 +24,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     final result = await productRepository.getAllProducts();
 
     result.fold(
-      (failure) => emit(ErrorState(message: 'some failure occured')),
+      (failure) => emit(ErrorState(message: failure.message)),
       (products) => emit(LoadedAllProductState(products: products)),
     );
   }
@@ -37,8 +37,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     final result = await productRepository.getProductById(event.productId);
 
     result.fold(
-      (failure) =>
-          emit(ErrorState(message: 'error occured while fetching the product')),
+      (failure) => emit(ErrorState(message: failure.message)),
       (product) => emit(LoadedSingleProductState(product: product)),
     );
   }
@@ -50,19 +49,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(LoadingState());
     final result = await productRepository.createProduct(event.product);
 
-    result.fold(
-      (failure) =>
-          emit(ErrorState(message: 'error occured while creating new product')),
-      (_) async {
-        final productsResult = await productRepository.getAllProducts();
-        productsResult.fold(
-          (failure) => emit(
-            ErrorState(message: 'error occured while creating new product'),
-          ),
-          (products) => emit(LoadedAllProductState(products: products)),
-        );
-      },
-    );
+    result.fold((failure) => emit(ErrorState(message: failure.message)), (
+      _,
+    ) async {
+      final productsResult = await productRepository.getAllProducts();
+      productsResult.fold(
+        (failure) => emit(ErrorState(message: failure.message)),
+        (products) => emit(LoadedAllProductState(products: products)),
+      );
+    });
   }
 
   Future<void> _onUpdateProduct(
@@ -72,19 +67,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(LoadingState());
     final result = await productRepository.updateProduct(event.product);
 
-    result.fold(
-      (failure) =>
-          emit(ErrorState(message: 'error occured while updating the product')),
-      (_) async {
-        final productsResult = await productRepository.getAllProducts();
-        productsResult.fold(
-          (failure) => emit(
-            ErrorState(message: 'error occured while updating the product'),
-          ),
-          (products) => emit(LoadedAllProductState(products: products)),
-        );
-      },
-    );
+    result.fold((failure) => emit(ErrorState(message: failure.message)), (
+      _,
+    ) async {
+      final productsResult = await productRepository.getAllProducts();
+      productsResult.fold(
+        (failure) => emit(ErrorState(message: failure.message)),
+        (products) => emit(LoadedAllProductState(products: products)),
+      );
+    });
   }
 
   Future<void> _onDeleteProduct(
@@ -94,18 +85,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(LoadingState());
     final result = await productRepository.deleteProduct(event.productId);
 
-    result.fold(
-      (failure) =>
-          emit(ErrorState(message: 'error occured while deleted the product')),
-      (_) async {
-        final productsResult = await productRepository.getAllProducts();
-        productsResult.fold(
-          (failure) => emit(
-            ErrorState(message: 'error occured while deleting the product'),
-          ),
-          (products) => emit(LoadedAllProductState(products: products)),
-        );
-      },
-    );
+    result.fold((failure) => emit(ErrorState(message: failure.message)), (
+      _,
+    ) async {
+      final productsResult = await productRepository.getAllProducts();
+      productsResult.fold(
+        (failure) => emit(ErrorState(message: failure.message)),
+        (products) => emit(LoadedAllProductState(products: products)),
+      );
+    });
   }
 }

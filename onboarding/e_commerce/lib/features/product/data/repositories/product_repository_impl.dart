@@ -25,10 +25,10 @@ class ProductRepositoryImpl extends ProductRepository {
         await remoteDataSource.createProduct(product);
         return Right(unit);
       } on ServerException {
-        return Left(ServerFailure());
+        return Left(ServerFailure('Server Failure'));
       }
     }
-    return Left(ServerFailure());
+    return Left(ServerFailure('Server Failure'));
   }
 
   @override
@@ -38,10 +38,10 @@ class ProductRepositoryImpl extends ProductRepository {
         await remoteDataSource.deleteProduct(productId);
         return Right(unit);
       } on ServerException {
-        return Left(ServerFailure());
+        return Left(ServerFailure('Server Failure'));
       }
     }
-    return Left(ServerFailure());
+    return Left(ServerFailure('Server Failure'));
   }
 
   @override
@@ -51,10 +51,10 @@ class ProductRepositoryImpl extends ProductRepository {
         await remoteDataSource.updateProduct(product);
         return Right(product);
       } on ServerException {
-        return Left(ServerFailure());
+        return Left(ServerFailure('Server Failure'));
       }
     }
-    return Left(ServerFailure());
+    return Left(ServerFailure('Server Failure'));
   }
 
   @override
@@ -64,14 +64,14 @@ class ProductRepositoryImpl extends ProductRepository {
         List<Product> products = await remoteDataSource.viewAllProducts();
         return Right(products);
       } on ServerException {
-        return Left(ServerFailure());
+        return Left(ServerFailure('Server Failure'));
       }
     } else {
       try {
         final products = await localDataSource.getRecentProducts();
         return Right(products);
       } on CacheException {
-        return Left(CacheFailure());
+        return Left(CacheFailure('Cache Failure'));
       }
     }
   }
@@ -83,9 +83,9 @@ class ProductRepositoryImpl extends ProductRepository {
         Product product = await remoteDataSource.viewSpecificProduct(productId);
         return Right(product);
       } on ServerException {
-        return Left(ServerFailure());
+        return Left(ServerFailure('Server Failure'));
       }
     }
-    return Left(ServerFailure());
+    return Left(ServerFailure('Server Failure'));
   }
 }
