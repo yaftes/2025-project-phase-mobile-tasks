@@ -33,7 +33,7 @@ class _AddProductPageState extends State<AddProductPage> {
     }
   }
 
-  void _submitProduct(BuildContext context) {
+  void _addProduct(BuildContext context) {
     final name = _nameController.text.trim();
     final price = double.parse(_priceController.text.trim());
     final description = _descriptionController.text.trim();
@@ -186,7 +186,7 @@ class _AddProductPageState extends State<AddProductPage> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    _submitProduct(context);
+                    _addProduct(context);
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -197,25 +197,6 @@ class _AddProductPageState extends State<AddProductPage> {
                   ),
                 ),
                 child: const Text('Add', style: TextStyle(color: Colors.white)),
-              ),
-            ),
-            SizedBox(height: 10),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(10),
-                    side: BorderSide(color: Colors.redAccent),
-                  ),
-                ),
-                child: const Text(
-                  'Delete',
-                  style: TextStyle(color: Colors.redAccent),
-                ),
               ),
             ),
           ],

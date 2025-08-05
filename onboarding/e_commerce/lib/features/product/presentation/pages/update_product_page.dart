@@ -20,12 +20,21 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
   final _priceController = TextEditingController();
   final _descriptionController = TextEditingController();
   File? _image;
+  late Product _product;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _product = ModalRoute.of(context)!.settings.arguments as Product;
+    _nameController.text = _product.name;
+    _descriptionController.text = _product.description;
+    _priceController.text = _product.price.toString();
+  }
 
   void _pickImage() async {
     final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
     );
-
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -38,15 +47,19 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
     final price = double.parse(_priceController.text.trim());
     final description = _descriptionController.text.trim();
 
-    final product = Product(
-      id: '',
+    final updatedProduct = Product(
+      id: _product.id,
       name: name,
       price: price,
       description: description,
-      imageUrl: '',
+      imageUrl: _product.imageUrl,
     );
 
-    context.read<ProductBloc>().add(CreateProductEvent(product));
+    context.read<ProductBloc>().add(UpdateProductEvent(updatedProduct));
+  }
+
+  void _deleteProduct(BuildContext context) {
+    context.read<ProductBloc>().add(DeleteProductEvent(_product.id));
   }
 
   @override
@@ -56,6 +69,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
         if (state is ErrorState) {
           showSnackBar(context, state.message);
         } else if (state is LoadedAllProductState) {
+          showSnackBar(context, 'Product updated successfully');
           Navigator.pop(context);
         }
       },
@@ -73,7 +87,6 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
               icon: const Icon(Icons.arrow_back_ios),
             ),
           ),
-
           body: Stack(
             children: [
               _buildForm(context),
@@ -107,19 +120,21 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: _image == null
-                    ? const Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.image_outlined, size: 40),
-                            SizedBox(height: 10),
-                            Text(
-                              'Upload Image',
-                              style: TextStyle(fontSize: 14),
-                            ),
-                          ],
-                        ),
-                      )
+                    ? (_product.imageUrl.isNotEmpty
+                          ? Image.network(_product.imageUrl, fit: BoxFit.cover)
+                          : const Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.image_outlined, size: 40),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    'Upload Image',
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                ],
+                              ),
+                            ))
                     : Image.file(_image!, fit: BoxFit.cover),
               ),
             ),
@@ -149,10 +164,8 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
               ],
               validator: (value) {
                 if (value == null || value.isEmpty) return 'Price is required';
-                if (double.tryParse(value) == null) {
+                if (double.tryParse(value) == null)
                   return 'Enter a valid number';
-                }
-
                 return null;
               },
               decoration: const InputDecoration(
@@ -193,23 +206,26 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   backgroundColor: Colors.blueAccent,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text('Add', style: TextStyle(color: Colors.white)),
+                child: const Text(
+                  'Update',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => _deleteProduct(context),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(10),
-                    side: BorderSide(color: Colors.redAccent),
+                    borderRadius: BorderRadius.circular(10),
+                    side: const BorderSide(color: Colors.redAccent),
                   ),
                 ),
                 child: const Text(

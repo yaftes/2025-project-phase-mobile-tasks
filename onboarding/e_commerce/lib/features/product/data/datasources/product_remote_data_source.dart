@@ -24,7 +24,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   @override
   Future<void> createProduct(Product product) async {
     final uri = Uri.https(
-      'g5-flutter-learning-path-be.onrender.com',
+      'g5-flutter-learning-path-be-tvum.onrender.com',
       '/api/v1/products',
     );
 
@@ -53,7 +53,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   @override
   Future<void> deleteProduct(String productId) async {
     final url = Uri.https(
-      'g5-flutter-learning-path-be.onrender.com',
+      'g5-flutter-learning-path-be-tvum.onrender.com',
       '/api/v1/products/$productId',
     );
     try {
@@ -69,7 +69,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   @override
   Future<Product> updateProduct(Product product) async {
     final url = Uri.https(
-      'g5-flutter-learning-path-be.onrender.com',
+      'g5-flutter-learning-path-be-tvum.onrender.com',
       '/api/v1/products/${product.id}',
     );
 
@@ -101,6 +101,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
       'g5-flutter-learning-path-be-tvum.onrender.com',
       '/api/v1/products',
     );
+
     try {
       final response = await client.get(url);
 
