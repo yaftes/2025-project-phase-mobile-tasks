@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/custom_card.dart';
 
 class SearchProductPage extends StatefulWidget {
   const SearchProductPage({super.key});

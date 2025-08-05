@@ -5,6 +5,7 @@ import '../../../../core/error/failures.dart';
 import '../entities/product.dart';
 
 abstract class ProductRepository {
+
   Future<Either<Failure, List<Product>>> getAllProducts();
 
   Future<Either<Failure, Product>> getProductById(String productId);
@@ -15,3 +16,9 @@ abstract class ProductRepository {
 
   Future<Either<Failure, Unit>> deleteProduct(String productId);
 }
+
+
+// we have an interface for repo inside the domain
+// we entity for defining each object
+// usecase for each methods inside the repo
+

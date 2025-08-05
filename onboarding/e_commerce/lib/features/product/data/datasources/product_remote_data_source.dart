@@ -4,17 +4,10 @@ import '../../../../core/error/exceptions.dart';
 import '../../data/models/product_model.dart';
 import '../../domain/entities/product.dart';
 
-final url = Uri.https(
-  'g5-flutter-learning-path-be.onrender.com',
-  '/api/v1/products',
-);
-
 abstract class ProductRemoteDataSource {
+  Future<List<Product>> getAllProducts();
 
-  
-  Future<List<Product>> viewAllProducts();
-
-  Future<Product> viewSpecificProduct(String productId);
+  Future<Product> getProductById(String productId);
 
   Future<void> createProduct(Product product);
 
@@ -103,9 +96,9 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   }
 
   @override
-  Future<List<Product>> viewAllProducts() async {
+  Future<List<Product>> getAllProducts() async {
     final url = Uri.https(
-      'g5-flutter-learning-path-be.onrender.com',
+      'g5-flutter-learning-path-be-tvum.onrender.com',
       '/api/v1/products',
     );
     try {
@@ -114,6 +107,8 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body) as Map<String, dynamic>;
         final List<dynamic> products = jsonData['data'];
+
+        // we have to cache
 
         return products.map((json) => ProductModel.fromJson(json)).toList();
       } else {
@@ -125,7 +120,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   }
 
   @override
-  Future<Product> viewSpecificProduct(String productId) async {
+  Future<Product> getProductById(String productId) async {
     final url = Uri.https(
       'g5-flutter-learning-path-be.onrender.com',
       '/api/v1/products/$productId',

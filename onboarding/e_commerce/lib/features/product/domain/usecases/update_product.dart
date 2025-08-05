@@ -7,7 +7,7 @@ class UpdateProduct {
   final ProductRepository repository;
   UpdateProduct(this.repository);
 
-  Future<Either<Failure, Product>> call(Product product) async {
-    return await repository.updateProduct(product);
+  Future<Either<Failure, Product>> call(Product product) {
+    return repository.updateProduct(product);
   }
 }

@@ -3,23 +3,13 @@ import '../../domain/entities/product.dart';
 
 class CustomCard extends StatelessWidget {
   final Product product;
-  final void Function() onDelete;
-
-  const CustomCard({required this.product, required this.onDelete, super.key});
+  const CustomCard({required this.product, super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        final result = await Navigator.pushNamed(
-          context,
-          '/detail',
-          arguments: product,
-        );
-
-        if (result == true) {
-          onDelete();
-        }
+        Navigator.pushNamed(context, '/detail', arguments: product);
       },
 
       child: Container(
@@ -38,10 +28,7 @@ class CustomCard extends StatelessWidget {
                   topRight: Radius.circular(22),
                 ),
                 image: DecorationImage(
-                  image: AssetImage(
-                    // : TODO  add the url implementation here
-                    '',
-                  ),
+                  image: AssetImage(product.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),

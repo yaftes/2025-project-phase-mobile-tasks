@@ -5,6 +5,7 @@ class NetworkInfoImpl extends NetworkInfo {
   final InternetConnection connection;
 
   NetworkInfoImpl(this.connection);
+
   @override
   Future<bool> get isConnected => connection.hasInternetAccess;
 }

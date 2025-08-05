@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/helpers.dart';
+import '../bloc/product_bloc.dart';
 import '../widgets/custom_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,9 +13,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    context.read<ProductBloc>().add(LoadAllProductEvent());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 252, 251, 251),
+
       body: Padding(
         padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
         child: Column(
@@ -22,7 +32,6 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  mainAxisSize: MainAxisSize.max,
                   children: [
                     SizedBox(
                       width: 30,
@@ -78,19 +87,19 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
 
-            SizedBox(height: 35),
-            //
+            const SizedBox(height: 35),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Available Products',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
                 Container(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                    border: BoxBorder.all(color: Colors.grey.withAlpha(90)),
+                    border: Border.all(color: Colors.grey.withAlpha(90)),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -101,37 +110,51 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
 
-            // Expanded(
-            //   child: ListView.builder(
-            //     itemCount: listOfProducts.length,
-            //     itemBuilder: (context, index) {
-            //       return CustomCard(
-            //         product: listOfProducts[index],
-            //         onDelete: () {
-            //           setState(() {});
-            //         },
-            //       );
-            //     },
-            //   ),
-            // ),
+            const SizedBox(height: 15),
+
+            Expanded(
+              child: BlocConsumer<ProductBloc, ProductState>(
+                listener: (context, state) {
+                  if (state is ErrorState) {
+                    showSnackBar(context, state.message);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is LoadingState) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is LoadedAllProductState) {
+                    if (state.products.isEmpty) {
+                      return const Center(
+                        child: Text('No products available.'),
+                      );
+                    }
+                    return ListView.builder(
+                      itemCount: state.products.length,
+                      itemBuilder: (context, index) {
+                        return CustomCard(product: state.products[index]);
+                      },
+                    );
+                  }
+                  return const Center(child: Text('Something went wrong.'));
+                },
+              ),
+            ),
           ],
         ),
       ),
 
       floatingActionButton: GestureDetector(
         onTap: () async {
-          final result = await Navigator.pushNamed(context, '/add');
-          if (result == true) {
-            setState(() {});
-          }
+          await Navigator.pushNamed(context, '/add');
+          context.read<ProductBloc>().add(LoadAllProductEvent());
         },
         child: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 38, 38, 231),
             borderRadius: BorderRadius.circular(50),
           ),
-          child: Icon(Icons.add, size: 30, color: Colors.white),
+          child: const Icon(Icons.add, size: 30, color: Colors.white),
         ),
       ),
     );

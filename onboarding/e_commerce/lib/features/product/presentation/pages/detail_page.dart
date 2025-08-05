@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/helpers.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/product.dart';
 
 class DetailPage extends StatefulWidget {
@@ -24,7 +24,7 @@ class _DetailPageState extends State<DetailPage> {
               height: screenHeight / 3,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(''),
+                  image: AssetImage(product.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),

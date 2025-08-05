@@ -25,10 +25,10 @@ class ProductRepositoryImpl extends ProductRepository {
         await remoteDataSource.createProduct(product);
         return Right(unit);
       } on ServerException {
-        return Left(ServerFailure('Server Failure'));
+        return Left(ServerFailure('unknown error from server'));
       }
     }
-    return Left(ServerFailure('Server Failure'));
+    return Left(ServerFailure('please connect to internet'));
   }
 
   @override
@@ -41,7 +41,7 @@ class ProductRepositoryImpl extends ProductRepository {
         return Left(ServerFailure('Server Failure'));
       }
     }
-    return Left(ServerFailure('Server Failure'));
+    return Left(ServerFailure('please connect to internet'));
   }
 
   @override
@@ -54,14 +54,14 @@ class ProductRepositoryImpl extends ProductRepository {
         return Left(ServerFailure('Server Failure'));
       }
     }
-    return Left(ServerFailure('Server Failure'));
+    return Left(ServerFailure('please connect to internet'));
   }
 
   @override
   Future<Either<Failure, List<Product>>> getAllProducts() async {
     if (await networkInfo.isConnected) {
       try {
-        List<Product> products = await remoteDataSource.viewAllProducts();
+        List<Product> products = await remoteDataSource.getAllProducts();
         return Right(products);
       } on ServerException {
         return Left(ServerFailure('Server Failure'));
@@ -80,12 +80,13 @@ class ProductRepositoryImpl extends ProductRepository {
   Future<Either<Failure, Product>> getProductById(String productId) async {
     if (await networkInfo.isConnected) {
       try {
-        Product product = await remoteDataSource.viewSpecificProduct(productId);
+        Product product = await remoteDataSource.getProductById(productId);
         return Right(product);
       } on ServerException {
         return Left(ServerFailure('Server Failure'));
       }
     }
-    return Left(ServerFailure('Server Failure'));
+
+    return Left(ServerFailure('please connect to internet'));
   }
 }

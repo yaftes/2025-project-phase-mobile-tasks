@@ -8,7 +8,7 @@ class CreateProduct {
 
   CreateProduct(this.repository);
 
-  Future<Either<Failure, Unit>> call(Product product) async {
-    return await repository.createProduct(product);
+  Future<Either<Failure, Unit>> call(Product product) {
+    return repository.createProduct(product);
   }
 }

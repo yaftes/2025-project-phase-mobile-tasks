@@ -3,11 +3,11 @@ import '../../../../core/error/failures.dart';
 import '../entities/product.dart';
 import '../repositories/product_repository.dart';
 
-class ViewAllProducts {
+class GetProductById {
   final ProductRepository repository;
-  ViewAllProducts(this.repository);
+  GetProductById(this.repository);
 
-  Future<Either<Failure, List<Product>>> call() async {
-    return await repository.getAllProducts();
+  Future<Either<Failure, Product>> call(String productId) {
+    return repository.getProductById(productId);
   }
 }

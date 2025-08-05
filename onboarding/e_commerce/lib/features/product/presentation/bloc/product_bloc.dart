@@ -1,14 +1,33 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../domain/entities/product.dart';
-import '../../domain/repositories/product_repository.dart';
+import '../../domain/usecases/create_product.dart';
+import '../../domain/usecases/delete_product.dart';
+import '../../domain/usecases/get_all_products.dart';
+import '../../domain/usecases/get_product_by_id.dart';
+import '../../domain/usecases/update_product.dart';
 part 'product_event.dart';
 part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  final ProductRepository productRepository;
+  // here we have the usecases as a parameter since they are the boundary between the domain and presentation layer
 
-  ProductBloc(this.productRepository) : super(InitialState()) {
+  final CreateProduct createProduct;
+  final GetAllProducts getAllProducts;
+  final GetProductById getProductById;
+  final UpdateProduct updateProduct;
+  final DeleteProduct deleteProduct;
+
+  // network info instance
+
+  ProductBloc({
+    required this.createProduct,
+    required this.getAllProducts,
+    required this.getProductById,
+    required this.updateProduct,
+    required this.deleteProduct,
+  }) : super(InitialState()) {
     on<LoadAllProductEvent>(_onLoadAllProducts);
     on<GetSingleProductEvent>(_onGetSingleProduct);
     on<CreateProductEvent>(_onCreateProduct);
@@ -16,13 +35,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<DeleteProductEvent>(_onDeleteProduct);
   }
 
+  // the onload method should give us either locally cached data or fetch from remote repository
+
   Future<void> _onLoadAllProducts(
     LoadAllProductEvent event,
     Emitter<ProductState> emit,
   ) async {
     emit(LoadingState());
-    final result = await productRepository.getAllProducts();
-
+    final result = await getAllProducts();
     result.fold(
       (failure) => emit(ErrorState(message: failure.message)),
       (products) => emit(LoadedAllProductState(products: products)),
@@ -34,7 +54,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     emit(LoadingState());
-    final result = await productRepository.getProductById(event.productId);
+    final result = await getProductById(event.productId);
 
     result.fold(
       (failure) => emit(ErrorState(message: failure.message)),
@@ -47,12 +67,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     emit(LoadingState());
-    final result = await productRepository.createProduct(event.product);
+    final result = await createProduct(event.product);
 
     result.fold((failure) => emit(ErrorState(message: failure.message)), (
       _,
     ) async {
-      final productsResult = await productRepository.getAllProducts();
+      final productsResult = await getAllProducts();
       productsResult.fold(
         (failure) => emit(ErrorState(message: failure.message)),
         (products) => emit(LoadedAllProductState(products: products)),
@@ -65,12 +85,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     emit(LoadingState());
-    final result = await productRepository.updateProduct(event.product);
+    final result = await updateProduct(event.product);
 
     result.fold((failure) => emit(ErrorState(message: failure.message)), (
       _,
     ) async {
-      final productsResult = await productRepository.getAllProducts();
+      final productsResult = await getAllProducts();
       productsResult.fold(
         (failure) => emit(ErrorState(message: failure.message)),
         (products) => emit(LoadedAllProductState(products: products)),
@@ -83,12 +103,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     emit(LoadingState());
-    final result = await productRepository.deleteProduct(event.productId);
+    final result = await deleteProduct(event.productId);
 
     result.fold((failure) => emit(ErrorState(message: failure.message)), (
       _,
     ) async {
-      final productsResult = await productRepository.getAllProducts();
+      final productsResult = await getAllProducts();
       productsResult.fold(
         (failure) => emit(ErrorState(message: failure.message)),
         (products) => emit(LoadedAllProductState(products: products)),

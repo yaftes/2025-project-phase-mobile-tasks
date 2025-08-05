@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'features/product/presentation/pages/add_update_page.dart';
+import 'features/product/presentation/pages/add_product_page.dart';
 import 'features/product/presentation/pages/detail_page.dart';
 import 'features/product/presentation/pages/home_page.dart';
 import 'features/product/presentation/pages/search_product_page.dart';
+import 'features/product/presentation/pages/update_product_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,8 +14,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
-        '/add': (context) => AddUpdatePage(),
-        '/update': (context) => AddUpdatePage(),
+        '/add': (context) => AddProductPage(),
+        '/update': (context) => UpdateProductPage(),
         '/detail': (context) => DetailPage(),
         '/search': (context) => SearchProductPage(),
       },
