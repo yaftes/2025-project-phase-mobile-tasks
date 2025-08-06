@@ -35,7 +35,6 @@ void main() {
   testWidgets('Verify the add product show success from valid inputs', (
     widgetTester,
   ) async {
-    // first we have to pump the widget
     await widgetTester.pumpWidget(
       MaterialApp(
         home: MultiBlocProvider(
@@ -44,7 +43,6 @@ void main() {
         ),
       ),
     );
-    // let's enter the text first
     await widgetTester.enterText(find.byKey(Key('price')), '24.0');
     await widgetTester.tap(find.byKey(Key('submit')));
     await widgetTester.pump();
