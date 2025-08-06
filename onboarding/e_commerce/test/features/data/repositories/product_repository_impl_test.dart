@@ -10,12 +10,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'product_repository_impl_test.mocks.dart';
 
-
-
 @GenerateMocks([NetworkInfo, ProductRemoteDataSource, ProductLocalDataSource])
-
 void main() {
-
   late MockProductLocalDataSource localDataSource;
   late MockProductRemoteDataSource remoteDataSource;
   late MockNetworkInfo networkInfo;
@@ -32,18 +28,14 @@ void main() {
     );
   });
 
-
-
-
-
   test(
     'no specific data should be fetched for view specific product method when the network is offline',
     () async {
       when(networkInfo.isConnected).thenAnswer((_) async => false);
-      final product = await repository.viewSpecificProduct('232');
+      final product = await repository.getProductById('232');
 
       verifyZeroInteractions(repository.remoteDataSource);
-      expect(product, Left(ServerFailure()));
+      expect(product, Left(ServerFailure('server error')));
     },
   );
 
@@ -67,7 +59,7 @@ void main() {
         ),
       ],
     );
-    final products = await repository.viewAllProducts();
+    final products = await repository.getAllProducts();
     expect(products.isRight(), true);
   });
 }
