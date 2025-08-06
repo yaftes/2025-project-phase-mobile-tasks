@@ -82,6 +82,8 @@ class _SearchProductPageState extends State<SearchProductPage> {
           //     ),
           //   ),
           // ),
+
+          
           Expanded(
             child: Container(
               decoration: BoxDecoration(color: Colors.white),

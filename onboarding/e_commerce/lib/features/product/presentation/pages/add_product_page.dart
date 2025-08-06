@@ -25,7 +25,6 @@ class _AddProductPageState extends State<AddProductPage> {
     final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
     );
-
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -51,41 +50,43 @@ class _AddProductPageState extends State<AddProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProductBloc, ProductState>(
-      listener: (context, state) {
-        if (state is ErrorState) {
-          showSnackBar(context, state.message);
-        } else if (state is LoadedAllProductState) {
-          Navigator.pop(context);
-        }
-      },
-      builder: (context, state) {
-        final isLoading = state is LoadingState;
+    return Scaffold(
+      backgroundColor: Colors.white,
 
-        return Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            title: const Text('Add Product'),
-            centerTitle: true,
-            leading: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.arrow_back_ios),
-            ),
-          ),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text('Add Product'),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
 
-          body: Stack(
+      body: BlocConsumer<ProductBloc, ProductState>(
+        listener: (context, state) {
+          if (state is ErrorState) {
+            showSnackBar(context, state.message);
+          } else if (state is CreatedState) {
+            // successfully created
+            Navigator.pop(context);
+          }
+        },
+        builder: (context, state) {
+          final isLoading = state is LoadingState;
+
+          return Stack(
             children: [
               _buildForm(context),
               if (isLoading)
                 Container(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withOpacity(0.5),
                   child: const Center(child: CircularProgressIndicator()),
                 ),
             ],
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
@@ -124,6 +125,7 @@ class _AddProductPageState extends State<AddProductPage> {
               ),
             ),
             const SizedBox(height: 20),
+
             const Text('Name'),
             const SizedBox(height: 6),
             TextFormField(
@@ -136,6 +138,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 border: InputBorder.none,
               ),
             ),
+
             const SizedBox(height: 16),
             const Text('Price'),
             const SizedBox(height: 6),
@@ -152,7 +155,6 @@ class _AddProductPageState extends State<AddProductPage> {
                 if (double.tryParse(value) == null) {
                   return 'Enter a valid number';
                 }
-
                 return null;
               },
               decoration: const InputDecoration(
@@ -165,6 +167,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 ),
               ),
             ),
+
             const SizedBox(height: 16),
             const Text('Description'),
             const SizedBox(height: 6),
@@ -180,6 +183,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 border: InputBorder.none,
               ),
             ),
+
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
@@ -193,7 +197,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   backgroundColor: Colors.blueAccent,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
                 child: const Text('Add', style: TextStyle(color: Colors.white)),

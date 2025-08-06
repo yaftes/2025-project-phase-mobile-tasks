@@ -8,6 +8,8 @@ import '../datasources/product_local_data_source.dart';
 import '../datasources/product_remote_data_source.dart';
 
 class ProductRepositoryImpl extends ProductRepository {
+
+  
   final ProductLocalDataSource localDataSource;
   final ProductRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;

@@ -6,7 +6,6 @@ import '../models/product_model.dart';
 
 abstract class ProductLocalDataSource {
   Future<List<Product>> getRecentProducts();
-
   Future<void> cacheProducts(List<Product> products);
 }
 
@@ -40,6 +39,4 @@ class ProductLocalDataSourceImpl implements ProductLocalDataSource {
       await prefs.setString(product.id, value);
     }
   }
-
-  
 }

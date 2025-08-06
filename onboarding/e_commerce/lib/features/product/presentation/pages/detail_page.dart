@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/helpers.dart';
 import '../../domain/entities/product.dart';
+import '../bloc/product_bloc.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -102,28 +105,37 @@ class _DetailPageState extends State<DetailPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 50,
-                            vertical: 10,
-                          ),
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadiusGeometry.circular(8),
-                            side: BorderSide(color: Colors.redAccent),
-                          ),
-                        ),
-                        onPressed: () {
-                          // ProductService.deleteProduct(product.name);
-                          // showSnackBar(context, 'Product Deleted');
-                          // Navigator.pop(context, true);
+                      BlocListener<ProductBloc, ProductState>(
+                        listener: (context, state) {
+                          if (state is DeletedState) {
+                            Navigator.pop(context);
+                          } else if (state is ErrorState) {
+                            showSnackBar(context, state.message);
+                          }
                         },
-                        child: Text(
-                          'DELETE',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 10,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 50,
+                              vertical: 10,
+                            ),
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(8),
+                              side: BorderSide(color: Colors.redAccent),
+                            ),
+                          ),
+                          onPressed: () {
+                            context.read<ProductBloc>().add(
+                              DeleteProductEvent(product.id),
+                            );
+                          },
+                          child: Text(
+                            'DELETE',
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 10,
+                            ),
                           ),
                         ),
                       ),

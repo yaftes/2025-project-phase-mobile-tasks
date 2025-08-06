@@ -33,3 +33,7 @@ class ErrorState extends ProductState {
   @override
   List<Object> get props => [message];
 }
+
+class CreatedState extends ProductState {}
+
+class DeletedState extends ProductState {}

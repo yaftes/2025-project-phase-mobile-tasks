@@ -15,6 +15,7 @@ class UpdateProductPage extends StatefulWidget {
 }
 
 class _UpdateProductPageState extends State<UpdateProductPage> {
+  
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _priceController = TextEditingController();
@@ -54,7 +55,6 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
       description: description,
       imageUrl: _product.imageUrl,
     );
-
     context.read<ProductBloc>().add(UpdateProductEvent(updatedProduct));
   }
 
@@ -164,8 +164,9 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
               ],
               validator: (value) {
                 if (value == null || value.isEmpty) return 'Price is required';
-                if (double.tryParse(value) == null)
+                if (double.tryParse(value) == null) {
                   return 'Enter a valid number';
+                }
                 return null;
               },
               decoration: const InputDecoration(

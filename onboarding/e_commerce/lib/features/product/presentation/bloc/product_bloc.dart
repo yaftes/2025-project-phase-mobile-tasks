@@ -11,8 +11,6 @@ part 'product_event.dart';
 part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  // here we have the usecases as a parameter since they are the boundary between the domain and presentation layer
-
   final CreateProduct createProduct;
   final GetAllProducts getAllProducts;
   final GetProductById getProductById;
@@ -68,16 +66,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ) async {
     emit(LoadingState());
     final result = await createProduct(event.product);
-
-    result.fold((failure) => emit(ErrorState(message: failure.message)), (
-      _,
-    ) async {
-      final productsResult = await getAllProducts();
-      productsResult.fold(
-        (failure) => emit(ErrorState(message: failure.message)),
-        (products) => emit(LoadedAllProductState(products: products)),
-      );
-    });
+    result.fold(
+      (failure) => emit(ErrorState(message: failure.message)),
+      (success) => CreatedState(),
+    );
   }
 
   Future<void> _onUpdateProduct(
@@ -105,14 +97,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(LoadingState());
     final result = await deleteProduct(event.productId);
 
-    result.fold((failure) => emit(ErrorState(message: failure.message)), (
-      _,
-    ) async {
-      final productsResult = await getAllProducts();
-      productsResult.fold(
-        (failure) => emit(ErrorState(message: failure.message)),
-        (products) => emit(LoadedAllProductState(products: products)),
-      );
-    });
+    result.fold(
+      (failure) => emit(ErrorState(message: failure.message)),
+      (success) => DeletedState(),
+    );
   }
 }
