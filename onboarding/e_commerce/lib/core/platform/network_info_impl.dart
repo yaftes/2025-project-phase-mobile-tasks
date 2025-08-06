@@ -3,7 +3,6 @@ import 'network_info.dart';
 
 class NetworkInfoImpl extends NetworkInfo {
   final InternetConnection connection;
-
   NetworkInfoImpl(this.connection);
 
   @override

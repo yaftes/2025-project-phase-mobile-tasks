@@ -69,7 +69,6 @@ class _AddProductPageState extends State<AddProductPage> {
           if (state is ErrorState) {
             showSnackBar(context, state.message);
           } else if (state is CreatedState) {
-            // successfully created
             Navigator.pop(context);
           }
         },
@@ -144,6 +143,7 @@ class _AddProductPageState extends State<AddProductPage> {
             const Text('Price'),
             const SizedBox(height: 6),
             TextFormField(
+              key: Key('price'),
               controller: _priceController,
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
@@ -189,6 +189,7 @@ class _AddProductPageState extends State<AddProductPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
+                key: const Key('submit'),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _addProduct(context);

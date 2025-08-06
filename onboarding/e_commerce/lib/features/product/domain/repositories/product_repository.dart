@@ -1,11 +1,9 @@
 import 'package:dartz/dartz.dart';
 // we use dartz for functional programming concepts like either
-
 import '../../../../core/error/failures.dart';
 import '../entities/product.dart';
 
 abstract class ProductRepository {
-
   Future<Either<Failure, List<Product>>> getAllProducts();
 
   Future<Either<Failure, Product>> getProductById(String productId);

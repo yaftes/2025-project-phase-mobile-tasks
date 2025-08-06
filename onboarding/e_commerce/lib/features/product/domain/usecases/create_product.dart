@@ -5,7 +5,6 @@ import '../repositories/product_repository.dart';
 
 class CreateProduct {
   final ProductRepository repository;
-
   CreateProduct(this.repository);
 
   Future<Either<Failure, Unit>> call(Product product) {

@@ -35,7 +35,6 @@ class DeleteProductEvent extends ProductEvent {
 }
 
 class CreateProductEvent extends ProductEvent {
-  // this is a parameter
   final Product product;
   const CreateProductEvent(this.product);
 
